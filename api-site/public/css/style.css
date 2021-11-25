@@ -83,10 +83,10 @@ h1{
 /* missao visao valores */
 
 .social {
-  background-color: #e5e5e5;
+  background-color: rgb(255, 183, 0);
   /* border: 3px solid yellowgreen; */
   padding: 50px 0;
-  height: 700px;
+  height: 500px;
 }
 
 .social .container {
@@ -112,52 +112,37 @@ h1{
   align-self: center;
   justify-self: center;
   text-align: center;
-  color: rgb(255, 183, 0);
+  color: white;
   margin: 0;
   /* border: 3px solid orange; */
 }
 .proposito{
-  align-self: center;
-  justify-self: center;
+  
   text-align: center;
-  width: 500px;
+  width: 700px;
   background-color: rgb(255, 183, 0);
   color: black;
-  height: 145px;
   border-radius: 10px;
-  -webkit-transform: scale(0.9);
-  -ms-transform: scale(0.9);
-  transform: scale(0.9);
-  transition: all .5s ease 0s;
-  margin-bottom: 165px;
-  margin-right: 100px;
+  font-size: 25px;
+  height: 230px;
+  font-weight: bolder;
+  margin-top: 20px;
+}
+.btn_esportes{
+  width: 140px;
+  height: 130px;
+  border-radius: 8px;
+  background-color: white;
+  border: 2px solid black;
+  margin-top: 0px;
+  margin-left: 50px;
 }
 
-.proposito:hover{
-  -webkit-transform: scale(1.4);
-  -ms-transform: scale(1.4);
-  transform: scale(1.4);
-  transition: all .5s ease 0s;
-}
-.img_jogando{
-  -webkit-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-  transition: all .5s ease 0s;
-}
-.img_jogando:hover{
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-  transition: all .5s ease 0s;
-}
 
 
 .boxes {
   display: flex;
- 
-
-
+  margin-top: 1px;  
   /* border: 3px solid blue; */
 }
 
@@ -213,15 +198,16 @@ h4 {
   /* border: 3px solid green; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-right: 0;
 }
 
 .banner-login {
   color: black;
 }
 
-.banner-login .card {
-  background-color: #e5e5e59f;
+.card {
+  background-color: #8b71719f;
   height: 450px;
   width: 400px;
   display: flex;
@@ -233,9 +219,11 @@ h4 {
   border-radius: 8px;
 }
 
+
 .banner-login a {
   color: white;
   text-decoration: none;
+  
 }
 
 .banner-login #div_erros_login {

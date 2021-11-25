@@ -32,7 +32,7 @@ router.post("/publicar/:idUsuario", function (req, res) {
 // })
 
 
-router.delete("/deletar", function (req, res) {
+router.delete("/avisos/deletar/:idAviso", function (req, res) {
     avisoController.deletar(req, res);
 });
 

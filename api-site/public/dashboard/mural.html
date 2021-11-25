@@ -25,7 +25,7 @@
 
         <div class="header-left">
 
-            <h1>AcquaTec</h1>
+            <h1>Subject</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
@@ -161,8 +161,8 @@
 
     }
 
-    function deletar(idAviso) {
-        fetch("/avisos/cadastrar", {
+    function deletaer(idAviso) {
+        fetch("/avisos/deletar/:idAviso", {
             method: "POST",
             id: idAviso
         }).then(function (resposta) {
@@ -185,7 +185,7 @@
         return false;
     }
 
-    function deletar2(idAviso) {
+    function deletar(idAviso) {
         console.log("Criar função de apagar post escolhido - ID" + idAviso);
 
         aguardar();
@@ -194,7 +194,7 @@
 
         console.log(idAviso);
 
-        fetch("/avisos/delete", {
+        fetch("/avisos/deletar/:idAviso", {
             method: "POST",
             id: idAviso
         }).then(function (resposta) {
