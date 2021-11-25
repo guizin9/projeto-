@@ -7,6 +7,10 @@ router.get("/", function (req, res) {
     avisoController.testar(req, res);
 });
 
+router.get("/listaresp", function (req, res) {
+    avisoController.listaresp(req, res);
+});
+
 router.get("/listar", function (req, res) {
     avisoController.listar(req, res);
 });
@@ -23,9 +27,20 @@ router.post("/publicar/:idUsuario", function (req, res) {
     avisoController.publicar(req, res);
 });
 
-router.delete("/avisos/deletar/:idAviso", function (req, res) {
+// router.post("/cadastrar", function (req, res) {
+//     avisoController.deletar(req, res);
+// })
+
+
+router.delete("/deletar", function (req, res) {
     avisoController.deletar(req, res);
 });
+
+
+
+//router.delete("/avisos/delete/:idAviso", function (req, res) {
+//    avisoController.deletar(req, res);
+//});
 
 router.put("/avisos/editar/:idAviso", function (req, res) {
     avisoController.editar(req, res);

@@ -23,7 +23,6 @@
 
     <div class="janela">
 
-
         <div class="header-left">
 
             <h1>AcquaTec</h1>
@@ -37,12 +36,12 @@
                     <h3>Esportes</h3>
                 </a>
             </div>
-
             <div class="btn-nav-white">
-                <a href="./dashboard.html">
+                <a href="../dashboard/grafico.html">
                     <h3>Gráficos</h3>
                 </a>
             </div>
+
 
             <div class="btn-nav">
                 <h3>Rotina</h3>
@@ -58,17 +57,17 @@
 
             <div class="avisos">
                 <div class="container">
-                    <h1>Publicar um aviso</h1>
+                    <h1 style="color: black;">Publicar um aviso</h1>
                     <div class="div-form">
                         <form id="form_postagem" method="post" onsubmit="return publicar()">
                             <label>
-                                Título:
+                                <span style="color: black;">Título:</span>
                                 <br>
                                 <input name="titulo" id="titulo" maxlength="100" type="text">
                             </label>
                             <br>
                             <label>
-                                Descrição (máximo de 250 caracteres):
+                                <span style="color: black;">Descrição (máximo de 250 caracteres):</span>
                                 <br>
                                 <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
                             </label>
@@ -76,7 +75,7 @@
                             <button>Enviar</button>
                         </form>
                     </div>
-                    <h1>Mural de Avisos</h1>
+                    <h1 style="color: black;">Mural de Avisos</h1>
                     <div class="div-results">
                         <div id="feed_container" class="feed-container">
                         </div>
@@ -87,19 +86,19 @@
 
 
 
-            <!-- MODAL -->
-            <!-- <div id="div_modal" class="div-modal">
+            <MODAL>
+            <div id="div_modal" class="div-modal">
                 <div id="modal_backdrop" onclick="fecharModal()" class="modal-backdrop">
                 </div>
                 <div id="modal_container" class="modal-container">
                     <button class="btn-fechar-modal" onclick="fecharModal()">X</button>
                 </div>
-            </div> -->
+            </div>
 
-            <!-- AGUARDAR -->
-            <!-- <div id="div_aguardar" class="div-aguardar">
+            <AGUARDAR>
+            <div id="div_aguardar" class="div-aguardar">
                 <img src="./assets/aguarde-pink3.gif" id="img_aguarde">
-            </div>  -->
+            </div>
 
         </div>
     </div>
@@ -112,7 +111,7 @@
 </html>
 
 <script>
-
+    var IdAviso= "";
     function limparFormulario() {
         document.getElementById("form_postagem").reset();
     }
@@ -163,12 +162,63 @@
     }
 
     function deletar(idAviso) {
+        fetch("/avisos/cadastrar", {
+            method: "POST",
+            id: idAviso
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Cadastro realizado com sucesso!");
+                window.location = "login.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function deletar2(idAviso) {
         console.log("Criar função de apagar post escolhido - ID" + idAviso);
 
+        aguardar();
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+
+        console.log(idAviso);
+
+        fetch("/avisos/delete", {
+            method: "POST",
+            id: idAviso
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Cadastro realizado com sucesso!");
+                window.location = "login.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
     }
 
     function atualizarFeed() {
-        //aguardar();
+        aguardar();
         fetch("/avisos/listar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
@@ -197,7 +247,7 @@
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
 
-
+                        idAviso = publicacao.idAviso;
                         spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";

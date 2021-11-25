@@ -18,6 +18,20 @@ function listar(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+//---- temporario
+function listaresp(req, res) {
+    avisoModel.listaresp().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 function listarPorUsuario(req, res) {
     var idUsuario = req.params.idUsuario;
@@ -93,10 +107,45 @@ function publicar(req, res) {
     }
 }
 
+function cadastrar(req, res) {
+    console.log('cad 1')
+}
+
+function deletar(req, res) {
+    
+    console.log('cad 2')
+    console.log(req)
+    console.log(res)
+    
+    var id = req.body.idAviso;
+
+
+
+    usuarioModel.deletar(id)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar excluir! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
 module.exports = {
     testar,
     listar,
+    listaresp,
     listarPorUsuario,
     pesquisarDescricao,
-    publicar
+    publicar,
+    deletar,
+    cadastrar
 }

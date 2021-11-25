@@ -1,4 +1,57 @@
 // sessão
+function barsChart() {
+    var data = {
+        labels : ["January","February","March","April","May","June","July"],
+        datasets : [
+            {
+            fillColor : "rgba(220,220,220,0.5)",
+            strokeColor : "rgba(220,220,220,1)",
+            pointColor : "rgba(220,220,220,1)",
+            pointStrokeColor : "#fff",
+            data : [65,59,90,81,56,55,40],
+            label : 'Tigers'
+        },
+        {
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,1)",
+            pointColor : "rgba(151,187,205,1)",
+            pointStrokeColor : "#fff",
+            data : [28,48,40,19,96,27,100],
+            label : 'Bears'
+        }
+        ]
+    };
+
+    var ctx = document.getElementById("barsChart").getContext("2d");
+    new Chart(ctx).Bar(data);
+
+    legend(document.getElementById("barsLegend"), data);
+}
+function pieChart() {
+    var data = [
+        {
+            value: 30,
+            color:"#F38630",
+            label: 'Bears'
+        },
+        {
+            value : 50,
+            color : "#E0E4CC",
+            label: 'Lynxes'
+        },
+        {
+            value : 100,
+            color : "#69D2E7",
+            label: 'Reindeer'
+        }
+    ];
+
+    var ctx = document.getElementById("pieChart").getContext("2d");
+    var pieChart = new Chart(ctx).Pie(data);
+
+    legend(document.getElementById("pieLegend"), data, pieChart);
+};
+
 function trocaFrase() {
     var r_text = [];
     r_text[0] = "Disciplina é a ponte entre metas e realizações.";

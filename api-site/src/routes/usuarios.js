@@ -7,6 +7,11 @@ router.get("/", function (req, res) {
     usuarioController.testar(req, res);
 });
 
+
+router.get("/listarEsporteUsuario", function (req, res) {
+    usuarioController.listarEsporteUsuario(req, res);
+});
+
 router.get("/listar", function (req, res) {
     usuarioController.listar(req, res);
 });

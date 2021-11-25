@@ -11,6 +11,8 @@
   "author": "Feito pelos desenvolvedores @ Bandtec Digital School",
   "license": "MIT",
   "dependencies": {
+    "chart.piecelabel.js": "^0.15.0",
+    "chartjs-plugin-datalabels": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mssql": "^7.1.3",

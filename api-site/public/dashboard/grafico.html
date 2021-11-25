@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    <link rel="shortcut icon" href="../assets/icon/favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../CB/css/demo.css">
+    <script src="../js/funcoes.js"></script>
+    <script src="../js/Chart.js"></script>        
+    <script src="../js/legend.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- scripts do Chart.js -->
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+
+
+
+
+
+    <meta charset=utf-8 />
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>Chart JS - Gr�ficos em JavaScript com legendas</title>
+    -->
+    <link href="../CB/css/demo.css" rel="stylesheet" type="text/css">
+    <script src="../CB/vendor/Chart.js"></script>
+    <script src="../CB/src/legend.js"></script>
+    <script src="../CB/src/demo.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    
+
+</head>
+<body onload="atualizarFeedEsp()">
+
+    <h1>Chart.js Com legendas</h1>
+    <hr>
+
+
+    <div class="janela">
+        <div class="header-left" >
+            <h1></h1>
+
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="../dashboard/cards.html">
+                    <h3>Esportes</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="../dashboard/grafico.html">
+                    <h3>Gráficos</h3>
+                </a>
+            </div>
+
+
+            <div class="btn-nav-white">
+                <a href="../dashboard/mural.html">
+                    <h3>Rotina</h3>
+                </a>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+
+        <div class="dash-right">
+            <div class="avisos">
+                <div>
+                    <h1>Gráfico 1</h1>
+                    <hr><canvas id="barsChart" width="600" height="400"></canvas>
+                    <div id="barsLegend"></div>
+                </div>
+                <hr>
+                <div > 
+                    <h1>Gráfico 2</h1>
+                    <canvas id="pieChart" width="600" height="400"></canvas>
+                    <div id="pieLegend"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    function limparFormulario() {
+        document.getElementById("form_cadastro").reset();
+    }
+
+    function atualizarFeedEsp() {
+        //aguardar();
+        fetch("/usuarios/listarEsporteUsuario").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    console.log('1 listarEsporteUsuario');
+
+                    var fut = 0;
+                    var vol = 0;
+                    var ten = 0;
+                    var nat = 0;
+                    var sur = 0;
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+                        console.log(publicacao);
+                        if (publicacao.esporte === "futebol") fut = publicacao.qtde; 
+                        if (publicacao.esporte === "volei"  ) vol = publicacao.qtde; 
+                        if (publicacao.esporte === "natação") nat = publicacao.qtde; 
+                        if (publicacao.esporte === "tenis"  ) ten = publicacao.qtde; 
+                        if (publicacao.esporte === "surf"   ) sur = publicacao.qtde; 
+                    }
+
+                    barsChart(fut, vol, nat, ten, sur);
+                    pieChart (fut, vol, nat, ten, sur);
+
+
+                    //finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            //finalizarAguardar();
+        });
+    } 
+    // function ListaEsporte() {
+    //     //aguardar();
+
+    //     fetch("/usuarios/cadastrar", {
+    //         method: "POST",
+    //         //body: formulario
+    //     }).then(function (resposta) {
+
+    //         console.log("resposta: ", resposta);
+
+    //         if (resposta.ok) {
+    //             window.alert("Cadastro realizado com sucesso!");
+    //             window.location = "login.html";
+    //             limparFormulario();
+    //             finalizarAguardar();
+    //         } else {
+    //             throw ("Houve um erro ao tentar realizar o cadastro!");
+    //         }
+    //     }).catch(function (resposta) {
+    //         console.log(`#ERRO: ${resposta}`);
+    //         finalizarAguardar();
+    //     });
+
+    //     return false;
+    // }
+
+</script>
