@@ -1,25 +1,28 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   background-color: rgb(0, 0, 0);
 }
 h1{
   text-decoration: underline;
-  font-style: italic;
+  color: white;
+  
 }
-
+ul.navbar{
+  color: rgb(255, 183, 0);
+}
 .container {
   width: 80%;
   margin: auto;
 }
 
 .header {
-  color: rgb(255, 183, 0);
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid rgb(255, 183, 0);
   /* border: 3px solid yellow; */
 }
+
 
 .header .container {
   display: flex;
@@ -34,6 +37,15 @@ h1{
 
 .agora {
   font-weight: 800;
+}
+#login1{
+  color: rgb(255, 183, 0);
+}
+#cadastro1{
+  color: rgb(255, 183, 0);
+}
+#login_efeito:hover{
+  opacity: 0.9;
 }
 
 .navbar {
@@ -194,7 +206,6 @@ h4 {
 }
 
 .banner-login .container {
-  height: 550px;
   /* border: 3px solid green; */
   display: flex;
   align-items: center;
@@ -207,8 +218,8 @@ h4 {
 }
 
 .card {
-  background-color: #8b71719f;
-  height: 450px;
+  background-color: white;
+  height: 548px;
   width: 400px;
   display: flex;
   justify-content: center;
@@ -216,7 +227,7 @@ h4 {
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
-  border-radius: 8px;
+  border: 3px solid black;
 }
 
 
