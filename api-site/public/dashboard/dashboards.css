@@ -117,7 +117,7 @@ body {
   position: relative;
   top: 0;
   left: 25%;
-  background-color: #161618;
+  background-color: black;
 
   /* width: 75%;
     display: flex;
@@ -180,4 +180,22 @@ video{
   margin-top: 100px;
   border-radius: 10px;
 }
+.ata{
+  width: 770px;
+}
 
+.div_text{
+  background-color: gold;
+  border-radius: 8px;
+  font-weight: bolder;
+}
+button{
+  color: black;
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: gold;
+}
+h3{
+  color: white;
+}

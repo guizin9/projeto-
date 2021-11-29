@@ -45,6 +45,9 @@ function listarEsporteUsuario(req, res) {
 function entrar(req, res) {
     var email = req.body.email;
     var senha = req.body.senha;
+    console.log('*********')    
+
+    console.log(req.body)    
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");

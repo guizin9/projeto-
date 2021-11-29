@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcquaTec | Tempo Real</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../dashboard/dashboards.css">
+
+    <script src="../js/funcoes.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body onload="validarSessao()">
+
+    <div class="janela">
+
+
+        <div class="header-left dash-header">
+
+            <h1></h1>
+
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav">
+                <h3>Esportes</h3>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="../dashboard/grafico.html">
+                    <h3>Gráficos</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./mural.html">
+                    <h3>Rotina</h3>
+                </a>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+
+        <div class="dash" id="dash1">
+            <button class="btn_esportes" id="fut" onclick="futebol()" style="background-color: rgba(255, 217, 0, 0.548);"><a href="../esportes/futebol.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyTrjEXIzQjNbh0nq_yv96C9sVSfgSDHvGgQ&usqp=CAU" height="100px" ></a></button>
+            <button class="btn_esportes" id="vol" onclick="volei()"><img src="data:image/png;base64,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" height="100px"></button>  
+            <button class="btn_esportes" id="ten" onclick="tenis()"><img src="data:image/png;base64,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" height="100px" ></button>
+            <button class="btn_esportes" id="nat" onclick="natacao()"><img src="https://cdn-icons-png.flaticon.com/512/1818/1818612.png" height="100px"></button>
+            <button class="btn_esportes" id="sur" onclick="surf()"><img src="https://png.pngtree.com/png-vector/20190116/ourlarge/pngtree-vector-surf-icon-png-image_322390.jpg" height="100px"></button>
+            <br>
+            <br>
+            
+            <center>    
+                <h1>Futebol</h1>
+                <select name="" id="sl_posicao" onchange="posicao()">
+                    <option value="">--Selecionar posição</option>
+                    <option value="Atacante">Atacante</option>
+                    <option value="Meia">Meia</option>
+                    <option value="Lateral">Lateral</option>
+                    <option value="Zagueiro">Zagueiro</option>
+                    <option value="Goleiro">Goleiro</option>
+                </select> <button onclick="dicas()">Dicas</button>&nbsp;<button>Avisos</button><br>
+                <br>
+                <div id="div_ata" class="ata" style="display: none;">
+                    <h3>Step 1</h3>
+                    <img src="http://www.quatromaiores.com.br/wp-content/uploads/1-neymar_messi_santos_barcelona.jpg" height="300px"><br>
+                    <div class="div_text">
+                        <span>1- Domine o toque de bola. Mesmo os melhores jogadores do mundo trabalham em cima de seu "toque de bola" de forma consistente. Ele define sua percepção da bola e sua habilidade em controlá-la com toques rápidos e de primeira. Para começar a trabalhar em outros aspectos do esporte, você precisa primeiramente ter um ótimo toque de primeira. Para treinar individualmente, chutar a bola repetidamente contra uma parede e controlá-la (apesar de simples) é extremamente eficaz. Porém, brincadeiras com pouca posse de bola - como, por exemplo, 2 contra 2, 4 contra 4 e até 1 contra 1, com cones formando as traves e usando uma regra de "2 toques" - são o treinamento ideal. Em jogos com baixa posse de bola, seja o mais criativo que você puder. Mesmo que tenha medo de parecer bobo demais, seja criativo assim mesmo. A criatividade é um ponto chave do jogo de um atacante. Para ter criatividade e ser eficaz, você precisa de constante movimentação entre os seus companheiros de equipe.</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 2</h3>
+                    <img src="https://cdn.domtotal.com/img/noticias/2011-05/330361_65441.jpg"><br>
+                    <div class="div_text">
+                        <span>2- Aprenda a movimentação. Você vai precisar estar sempre na ponta dos pés, melhorando assim sua velocidade, força e agilidade. Como um atacante, é crucial se manter sempre em movimento (em direções diferentes). Você precisa incomodar e confundir a defesa adversária. Da próxima vez que você for jogar de costas para o gol, experimente correr em círculos em volta de alguns zagueiros antes de partir pro ataque ou confira como eles estão posicionados antes de receber a bola e segurá-la. Não seja um jogador fácil de ser marcado, pois isso lhe deixará menos tempo com a bola. A regra número um é não correr em linha reta, mas em curvas e zigue-zagues. Isso também vai permitir que você ultrapasse até as melhores armadilhas com a prática.</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 3</h3>
+                    <img src="../assets/WhatsApp Image 2021-11-28 at 19.45.59.jpeg" height="300px"><br>
+                    <div class="div_text">
+                        <span>3- Pratique o chute. A habilidade número um de um atacante. A técnica do chute é uma arte. Pratique contra uma parede, ficando a 5 metros de distância e chutando de leve com a parte de fora do pé. Continue treinando isso, mesmo que pareça um chute "seco" demais e você se sinta estranho por não chutar forte. Depois, se afaste e fique a 15 metros de distância da parede. Chute-a da mesma forma, mas com força, fazendo com que ela mal saia do chão (alguns centímetros), com o máximo de força e precisão que você conseguir. Os erros mais comuns são cruzar uma perna na frente da outra, se inclinando demais e tirando os olhos da bola. Não se engane; cobranças de escanteio e de falta com curva são interessantes, mas os melhores atacantes têm a habilidade de chutar a bola rasteira e com força.</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 4</h3>
+                    <img src="https://conteudo.imguol.com.br/c/esporte/94/2019/12/19/cristiano-ronaldo-durante-partida-da-juventus-contra-a-sampdoria-pelo-campeonato-italiano-1576759655342_v2_450x337.jpg" height="300px"><br>
+                    <div class="div_text">
+                        <span>4- Se você acha que já dominou isso, experimente com a bola em movimento e depois de dominá-la. Depois, tente chutá-la de primeira. Consiga alguém para cruzar a bola para você cabecear e não tenha medo. Só vai machucar se você não for com tudo e deixar a bola bater na sua cabeça, e não o contrário. Mantenha o olhar na bola (não feche os olhos!) e mantenha a sua cabeça e corpo atrás da bola. Você comanda a direnção aonde a bola deve ir. Não deixe que ela escape de você.</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 5</h3>
+                    <img src="https://i.pinimg.com/originals/67/62/2e/67622ec6ff66763dec48b2892957b6a4.jpg" height="300px"><br>
+                    <div class="div_text">
+                        <span>5- Jogo de cintura é essencial. É muito importante que você saiba o que fazer quando estiver cara a cara com um jogador adversário, desviando deles. Para isso, não drible ou desvie como um robô. Faça isso da forma mais natural possível. Se você aprender a se esquivar e driblar de diferentes formas, os zagueiros adversários não vão saber o que esperar.</span>
+                    </div>
+                </div>
+                </center>
+                <div id="ata_dicas" style="color: white; display: none;">
+                   <ul>- Em jogos de pouca posse de bola, seja o mais criativo possível. Fique o mais calmo possível quando estiver com a posse de bola. </ul>
+                   <ul>- Se você tiver um bom toque de bola, você pode confiar nele, e a partir disso, todos os outros fundamentos vão fluir naturalmente.</ul>
+                   <ul>- Tenha uma dieta balanceada, com muito carboidrato, e mantenha-se sempre bem hidratado.</ul>
+                   <ul>- Treine o máximo que puder. Desta forma, você evoluirá muito mais rápido.</ul>
+                   <ul>- Seja confiante em relação às suas habilidades. Não deixe os seus erros afetarem as jogadas seguintes.</ul>
+                </div>
+
+                <center>
+                <div id="div_meia" class="ata" style="display: none;">
+                    <h3>Step 1</h3>
+                    <img src="https://premierleaguebrasil.com.br/wp-content/uploads/2019/08/Kevin-de-Bruyne-Manchester-City-Premier-League-Shaun-Botterill-Collection-Getty-Images-Sport.jpg" height="300px"><br>
+                    <div class="div_text">
+                        <span>1- Ganhe experiência jogando futebol. Um meio-campo é a posição mais desafiante de dominar, pois o jogo acontece em torno de você e leva tempo ser bom nesta função..</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 2</h3>
+                    <img src="https://cdn.domtotal.com/img/noticias/2011-05/330361_65441.jpg"><br>
+                    <div class="div_text">
+                        <span>2- Esteja em forma. Tenha energia. É importante ser um bom atleta; por isso, é essencial estar em forma para ser um meio-campo. É a posição mais importante do campo. (Você não precisa ser veloz; na verdade, não é necessário ser rápido nessa função).</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 3</h3>
+                    <img src="https://www.conmebol.com/sites/default/files/userimagnes/juninho_pirlo.jpg" height="300px"><br>
+                    <div class="div_text">
+                        <span>3- Tenha boas habilidades técnicas. Pratique suas habilidades: suas perícia com a bola precisa estar acima da média ou ser um exemplo, pois você será a pessoa que ficará com a bola na maior parte do tempo e não pode perdê-la para o outro time.
+                            Você precisa saber controlar, passar e receber bem a bola. (Não apenas com os seus pés, mas, também, com as outras partes do seu corpo — como seu peito e suas coxas.)
+                            Saiba bem como driblar a bola.</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 4</h3>
+                    <img src="https://images.impresa.pt/olimpia/2021-07-02-Toni-Kroos-Alemanha-Euro-2020.jpg-5f4a4668-1/original" height="300px"><br>
+                    <div class="div_text">
+                        <span>4- Esteja disposto e capaz de passar a bola. Se você não é bom ao passar a bola, nem tente jogar no meio de campo; pois é lá que a mágica acontece onde as pessoas com as melhores habilidades de passe estão. Você precisa jogar no ar e no chão com passos curtos, sendo habilidoso tanto no ar quanto no chão. É necessário ser o jogador que é capaz de ler e analisar o jogo, identificar as jogadas de seus colegas e executar os passos.
+                            É muito importante saber como criar mais oportunidades para seu time fazer gol. É por esse motivo que os jogadores ofensivos do meio-campo são chamados de "armadores".</span>
+                    </div>
+                    <br><br>
+                    <h3>Step 5</h3>
+                    <img src="https://maisqueumjogo.com.br/wp-content/uploads/2021/10/Pogba-Manchester-United-251021.jpg" height="300px"><br>
+                    <div class="div_text">
+                        <span>5- Pratique suas técnicas defensivas. O meio-campo não só ataca; ele é o mecanismo que mantém o time trabalhando no ataque e na defesa.
+                        </span>
+                    </div>
+                    <br><br>
+                    <h3>Step 6</h3>
+                    <img src="https://i.pinimg.com/originals/67/62/2e/67622ec6ff66763dec48b2892957b6a4.jpg" height="300px"><br>
+                    <div class="div_text">
+                        <span>6- 
+                            Fique atento à bola e às oportunidades de gol. Sempre preste atenção nas pessoas que estão perto de você e movimente-se pelo local quando estiver sem a bola.
+                            Tenha uma boa visão do jogo. Desse modo, você poderá mover a bola com sucesso pelo campo e também criar oportunidades de gol. Um meio-campo possui o controle do jogo. Isso significa passar a bola e estar atento a todas as jogadas.
+                        </span>
+                    </div>
+                </div>
+                </center>
+                <div id="meia_dicas" style="color: white; display: none;">
+                   <ul>- O primeiro toque com a bola é muito importante. Sempre direcione o primeiro toque para bem longe do outro time. </ul>
+                   <ul>- Sempre tenha uma perspectiva positiva do jogo.</ul>
+                   <ul>- Trabalhe bastante. Nunca pense que você é perfeito.</ul>
+                   <ul>- Sempre procure a bola.</ul>
+                   <ul>- É preciso saber manobrar a bola entre os adversários.</ul>
+                   <ul>- Mantenha um bom equilíbrio entre ataque e defesa.</ul>
+                </div>
+
+                <center>
+                    <div id="div_lateral" class="ata" style="display: none;">
+                        <h3>Step 1</h3>
+                        <img src="https://www.lance.com.br/files/article_main/uploads/2021/01/18/60060c9bb8218.jpeg" height="300px"><br>
+                        <div class="div_text">
+                            <span>1-Movimente-se. Você tem que ser criativo e evasivo se quiser trabalhar próximo a linha. Ter um pé rápido, ser capaz de tomar decisões rápidas e driblar um defensor - às vezes dois - são tarefas imperativas para criar espaço na linha lateral.</span>
+                        </div>
+                        <br><br>
+                        <h3>Step 2</h3>
+                        <img src="data:image/jpeg;base64,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"><br>
+                        <div class="div_text">
+                            <span>2- Decisões rápidas. Para estar na ala, você tem que ter um bom passe. Isso também vale para qualquer meio de campo ou atacante, mas a diferença é que nas laterais você terá que fazer isso rápido. No geral, quando você tem a bola nas alas, já deve saber se irá passar ou driblar, quando vai passar ou driblar, e qual dos pés irá usar.</span>
+                        </div>
+                        <br><br>
+                        <h3>Step 3</h3>
+                        <img src="https://www.conmebol.com/sites/default/files/userimagnes/juninho_pirlo.jpg" height="300px"><br>
+                        <div class="div_text">
+                            <span>3- Não tenha medo de atacar. Nas alas, você será chamado muitas vezes para correr, cruzar, atacar na linha de fundo e chutar a gol. É preciso pensar antecipadamente quando estiver jogando nas laterais. Raramente um gol é marcado no futebol onde um lateral não esteja envolvido no passe ou na jogada em si. Fazer um jogo largo é uma parte importante no jogo hoje em dia, e para vencer, você tem que usar todos os seus jogadores na linha lateral.</span>
+                        </div>
+                        <br><br>
+                        <h3>Step 4</h3>
+                        <img src="https://images.impresa.pt/olimpia/2021-07-02-Toni-Kroos-Alemanha-Euro-2020.jpg-5f4a4668-1/original" height="300px"><br>
+                        <div class="div_text">
+                            <span>4- Seja uma válvula de escape. Se já não fosse difícil o suficiente jogar na lateral, você terá que se movimentar bastante sem a bola. Você frequentemente será uma válvula de escape para o jogador do outro lado do campo tentando trocar a bola de lado, ou um zagueiro ou meio de campo em dificuldades, ou um atacante que precisa tocar a bola pra trás. Nas alas, você será a opção de confiança, com os companheiros de equipe fazendo você correr através dos flancos, sobreposições e mandando bolas quadradas. Posicione-se bem o tempo todo nas alas, pois se você chegar onde precisa atrasado, seu time acabará perdendo a bola.</span>
+                        </div>
+                        <br><br>
+                        <h3>Step 5</h3>
+                        <img src="https://maisqueumjogo.com.br/wp-content/uploads/2021/10/Pogba-Manchester-United-251021.jpg" height="300px"><br>
+                        <div class="div_text">
+                            <span>5- Cruzamentos e viradas de jogo. Na lateral, quando você faz tudo que deve fazer, acaba encontrando o caminho através do campo para fazer uma coisa - um cruzamento. Você precisa ser capaz de chutar a bola - em linha reta, longo ou curto - através do campo. Às vezes de 35 a 45 metros. Pratique passes longos e faltas o quanto puder e você realmente pode fazer a diferença no jogo.</span>
+                        </div>
+                        <br><br>
+                    </div>
+                </center>
+                    <div id="lateral_dicas" style="color: white; display: none;">
+                       <ul>- O primeiro toque com a bola é muito importante. Sempre direcione o primeiro toque para bem longe do outro time. </ul>
+                       <ul>- Sempre tenha uma perspectiva positiva do jogo.</ul>
+                       <ul>- Trabalhe bastante. Nunca pense que você é perfeito.</ul>
+                       <ul>- Sempre procure a bola.</ul>
+                       <ul>- É preciso saber manobrar a bola entre os adversários.</ul>
+                       <ul>- Mantenha um bom equilíbrio entre ataque e defesa.</ul>
+                    </div>
+    
+    
+
+
+            
+        </div>
+        
+        <!-- <div id="div_video" style="display: none;">
+            <video src="../assets/VID-20210126-WA0031.mp4" autoplay muted loop ></video>
+        </div>  -->
+    </div>
+</body>
+</html>
+<script>
+    function posicao(){
+        if (sl_posicao.value == "Atacante"){
+            document.getElementById("div_lateral").style.display = "none";
+            document.getElementById("lateral_dicas").style.display = "none";
+            document.getElementById("div_ata").style.display = "block";
+            document.getElementById("ata_dicas").style.display = "none";
+            document.getElementById("meia_dicas").style.display = "none";
+            document.getElementById("div_meia").style.display = "none";
+        }
+        if (sl_posicao.value == "Meia"){
+            document.getElementById("div_lateral").style.display = "none";
+            document.getElementById("lateral_dicas").style.display = "none";
+            document.getElementById("div_ata").style.display = "none";
+            document.getElementById("ata_dicas").style.display = "none";
+            document.getElementById("meia_dicas").style.display = "none";
+            document.getElementById("div_meia").style.display = "block";
+        }
+        if (sl_posicao.value == "Lateral"){
+            document.getElementById("div_lateral").style.display = "block";
+            document.getElementById("lateral_dicas").style.display = "none";
+            document.getElementById("div_ata").style.display = "none";
+            document.getElementById("ata_dicas").style.display = "none";
+            document.getElementById("meia_dicas").style.display = "none";
+            document.getElementById("div_meia").style.display = "none";
+        }
+    }
+    function dicas(){
+        if (sl_posicao.value == "Atacante"){
+            document.getElementById("div_lateral").style.display = "none";
+            document.getElementById("lateral_dicas").style.display = "none";
+            document.getElementById("div_ata").style.display = "none";
+            document.getElementById("ata_dicas").style.display = "block";
+            document.getElementById("meia_dicas").style.display = "none";
+            document.getElementById("meia_dicas").style.display = "none"
+        }
+        if(sl_posicao.value == "Meia"){
+            document.getElementById("div_lateral").style.display = "none";
+            document.getElementById("lateral_dicas").style.display = "none";
+            document.getElementById("div_meia").style.display = "none";
+            document.getElementById("div_ata").style.display = "none";
+            document.getElementById("ata_dicas").style.display = "none";
+            document.getElementById("meia_dicas").style.display = "block"
+
+        }
+        if(sl_posicao.value == "Lateral"){
+            document.getElementById("div_lateral").style.display = "none";
+            document.getElementById("lateral_dicas").style.display = "block";
+            document.getElementById("div_meia").style.display = "none";
+            document.getElementById("div_ata").style.display = "none";
+            document.getElementById("ata_dicas").style.display = "none";
+            document.getElementById("meia_dicas").style.display = "none"
+        }
+    }
+</script>
